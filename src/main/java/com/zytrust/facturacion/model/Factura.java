@@ -16,6 +16,11 @@ public class Factura {
     @Column(name = "FACT_ID")
     private String id;
 
+
+    @ManyToOne                      //relacion con cliente
+    @JoinColumn(name="CLI_ID")
+    private Cliente Cliente;
+
     @Column(name = "FACT_ESTADO")
     private String estado;
     @Column(name = "FACT_FECHA_EMISION")

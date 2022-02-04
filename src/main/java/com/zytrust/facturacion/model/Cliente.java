@@ -11,7 +11,7 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CLI_ID")
-    private Integer id;
+    private String id;
 
     @Column(name = "CLI_NOMBRES")
     private String nombres;
@@ -29,11 +29,11 @@ public class Cliente {
     private String direccion;
     //relacion factura
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

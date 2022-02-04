@@ -14,11 +14,19 @@ public class Detalle {
     @Column(name = "DET_ID")
     private String numero;
 
+
+    @ManyToOne                      //relacion con factura
+    @JoinColumn(name="FACT_ID")
+    private Factura Factura;
+
+
+    @ManyToOne                      //relacion con producto
+    @JoinColumn(name="PROD_ID")
+    private Producto Producto;
+
     @Column(name = "DET_CANTIDAD")
     private Integer cantidad;
 
-    //producto y factura
-    //relacion producto y factura
 
 
     public String getNumero() {

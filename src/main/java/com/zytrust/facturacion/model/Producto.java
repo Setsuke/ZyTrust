@@ -1,5 +1,6 @@
 package com.zytrust.facturacion.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,10 +11,14 @@ import java.math.BigDecimal;
 public class Producto {
 
     @Id
+    @Column(name = "PROD_ID")
     private String id;
 
+    @Column(name = "PROD_NOMBRE")
     private String nombre;
+    @Column(name = "PROD_PRECIO")
     private BigDecimal precio;
+    @Column(name = "PROD_STOCK")
     private Integer stock;
 
     //relacion detalle

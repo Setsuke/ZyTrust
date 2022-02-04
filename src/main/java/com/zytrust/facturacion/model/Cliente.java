@@ -7,14 +7,22 @@ import javax.persistence.*;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "CLI_ID")
     private Integer id;
 
+    @Column(name = "CLI_NOMBRES")
     private String nombres;
+    @Column(name = "CLI_APELLIDOS")
     private String apellidos;
+    @Column(name = "CLI_DNI")
     private String dni;
+    @Column(name = "CLI_TELEFONO")
     private String telefono;
+    @Column(name = "CLI_RUC")
     private String ruc;
+    @Column(name = "CLI_RAZON_SOCIAL")
     private String razonSocial;
+    @Column(name = "CLI_DIRECCION")
     private String direccion;
     //relacion factura
 

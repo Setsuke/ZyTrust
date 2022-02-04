@@ -1,6 +1,7 @@
 package com.zytrust.facturacion.model;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,14 +15,23 @@ public class Factura {
     @Id
     private String id;
 
+    @Column(name = "FACT_ESTADO")
     private String estado;
+    @Column(name = "FACT_FECHA_EMISION")
     private LocalDate fechaEmision;
+    @Column(name = "FACT_FECHA_VENCIMIENTO")
     private LocalDate fechaVencimiento;
+    @Column(name = "FACT_FECHA_PAGO")
     private LocalDate fechaPago;
+    @Column(name = "FACT_TIPO_PAGO")
     private String tipoPago;
+    @Column(name = "FACT_SUBTOTAL")
     private BigDecimal subtotal;
+    @Column(name = "FACT_IMPUESTO")
     private BigDecimal impuesto;
+    @Column(name = "FACT_TOTAL")
     private BigDecimal total;
+
     //cliente id
     //relacion con detalles y clientes
 
@@ -29,9 +39,7 @@ public class Factura {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public void setId(String id) {this.id = id;}
 
     public String getEstado() {
         return estado;

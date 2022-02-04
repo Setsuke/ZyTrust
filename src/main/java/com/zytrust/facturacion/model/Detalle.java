@@ -1,15 +1,16 @@
 package com.zytrust.facturacion.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Data
 @Entity
-@Table(name = "FAC Detalles")
+@Table(name = "FAC_Detalles")
 public class Detalle {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "DET_ID")
     private String numero;
 

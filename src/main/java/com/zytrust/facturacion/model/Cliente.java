@@ -1,9 +1,12 @@
 package com.zytrust.facturacion.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
-@Table(name = "FAC Clientes")
+@Table(name = "FAC_Clientes")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

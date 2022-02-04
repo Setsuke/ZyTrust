@@ -1,18 +1,19 @@
 package com.zytrust.facturacion.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Data
 @Entity
-@Table (name = "FAC Facturas")
+@Table (name = "FAC_Facturas")
 public class Factura {
 
     @Id
+    @Column(name = "FACT_ID")
     private String id;
 
     @Column(name = "FACT_ESTADO")
@@ -25,21 +26,24 @@ public class Factura {
     private LocalDate fechaPago;
     @Column(name = "FACT_TIPO_PAGO")
     private String tipoPago;
-    @Column(name = "FACT_SUBTOTAL")
+    @Column(name = "FACT_SUBTOTAL", precision = 7,scale = 2,nullable = false)
     private BigDecimal subtotal;
-    @Column(name = "FACT_IMPUESTO")
+    @Column(name = "FACT_IMPUESTO", precision = 7,scale = 2,nullable = false)
     private BigDecimal impuesto;
-    @Column(name = "FACT_TOTAL")
+    @Column(name = "FACT_TOTAL", precision = 7,scale = 2,nullable = false)
     private BigDecimal total;
 
     //cliente id
     //relacion con detalles y clientes
 
+
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {this.id = id;}
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getEstado() {
         return estado;
@@ -104,7 +108,4 @@ public class Factura {
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
-
-
-
 }

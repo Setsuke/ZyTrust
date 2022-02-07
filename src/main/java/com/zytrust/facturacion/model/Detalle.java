@@ -1,8 +1,23 @@
 package com.zytrust.facturacion.model;
-
-import lombok.Data;
+/*
+ * @(#)Detalle.java
+ *
+ * Copyright 2019 ZyTrust SA, Todos los derechos reservados.
+ * ZT PROPRIETARIO/CONFIDENTIALIDAD. Su uso está sujeto a los
+ * términos de la licencia adquirida a ZyTrust SA.
+ * No se permite modificar, copiar ni difundir sin autorización
+ * expresa de ZyTrust SA.
+ */
+/**
+ * Esta clase representa a un detalle y debe ser usada para almacenar
+ * datos e intercambiarlos con otros objetos.
+ *
+ * @author Sergio Alva
+ * @version 1.00, 04/02/2022
+ */
 
 import javax.persistence.*;
+import lombok.Data;
 
 @Data
 @Entity
@@ -10,24 +25,19 @@ import javax.persistence.*;
 public class Detalle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "DET_ID")
-    private String numero;
+    private String numero;  // Identificador del detalle
 
-
-    @ManyToOne                      //relacion con factura
+    @ManyToOne
     @JoinColumn(name="FACT_ID")
-    private Factura Factura;
+    private Factura factura;
 
-
-    @ManyToOne                      //relacion con producto
+    @ManyToOne
     @JoinColumn(name="PROD_ID")
-    private Producto Producto;
+    private Producto producto;
 
     @Column(name = "DET_CANTIDAD")
     private Integer cantidad;
-
-
 
     public String getNumero() {
         return numero;
@@ -35,6 +45,22 @@ public class Detalle {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public Factura getFactura() {
+        return factura;
+    }
+
+    public void setFactura(Factura factura) {
+        this.factura = factura;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public Integer getCantidad() {

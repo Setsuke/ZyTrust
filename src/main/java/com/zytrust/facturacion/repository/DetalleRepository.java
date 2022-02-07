@@ -1,6 +1,6 @@
 package com.zytrust.facturacion.repository;
 /*
- * @(#)FacturaRepository.java
+ * @(#)DetalleRepository.java
  *
  * Copyright 2019 ZyTrust SA, Todos los derechos reservados.
  * ZT PROPRIETARIO/CONFIDENTIALIDAD. Su uso está sujeto a los
@@ -9,15 +9,15 @@ package com.zytrust.facturacion.repository;
  * expresa de ZyTrust SA.
  */
 /**
- * Esta interfaz representa a un FacturaRepository y debe ser usada para
+ * Esta interfaz representa a un DetalleRepository y debe ser usada para
  * almacenar datos e intercambiarlos con otros objetos.
  *
  * @author Sergio Alva
  * @version 1.00, 04/02/2022
  */
 
-import com.zytrust.facturacion.model.Factura;
+import com.zytrust.facturacion.model.Detalle;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FacturaRepository extends JpaRepository<Factura,String> {
+public interface DetalleRepository extends JpaRepository<Detalle,String> {
 }

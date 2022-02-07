@@ -1,6 +1,6 @@
 package com.zytrust.facturacion.controller;
 /*
- * @(#)FacturaController.java
+ * @(#)DetalleController.java
  *
  * Copyright 2019 ZyTrust SA, Todos los derechos reservados.
  * ZT PROPRIETARIO/CONFIDENTIALIDAD. Su uso está sujeto a los
@@ -9,15 +9,15 @@ package com.zytrust.facturacion.controller;
  * expresa de ZyTrust SA.
  */
 /**
- * Esta clase representa a un FacturaController y debe ser usada para almacenar
+ * Esta clase representa a un DetalleController y debe ser usada para almacenar
  * datos e intercambiarlos con otros objetos.
  *
  * @author Sergio Alva
  * @version 1.00, 04/02/2022
  */
 
-import com.zytrust.facturacion.model.Factura;
-import com.zytrust.facturacion.service.FacturaService;
+import com.zytrust.facturacion.model.Detalle;
+import com.zytrust.facturacion.service.DetalleService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -28,38 +28,38 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/factura")
-public class FacturaController {
+@RequestMapping("/detalle")
+public class DetalleController {
 
     @Autowired
-    private FacturaService facturaService;
+    private DetalleService detalleService;
 
     @PostMapping("/guardar")
-    private ResponseEntity<Factura> guardar (@RequestBody Factura factura){
-        Factura temp = facturaService.create(factura);
+    private ResponseEntity<Detalle> guardar (@RequestBody Detalle detalle){
+        Detalle temp = detalleService.create(detalle);
         try{
             return ResponseEntity.created(
-                    new URI("/factura/guardar"+temp.getId())).body(temp);
+                    new URI("/detalle/guardar"+temp.getNumero())).body(temp);
         } catch (URISyntaxException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
     @GetMapping("/listar")
-    private ResponseEntity<List<Factura>> listarFacturas (){
-        return ResponseEntity.ok(facturaService.getAllFacturas());
+    private ResponseEntity<List<Detalle>> listarDetalles (){
+        return ResponseEntity.ok(detalleService.getAllDetalles());
     }
 
     @DeleteMapping("/eliminar")
-    private ResponseEntity<List<Factura>> eliminarFactura (
-            @RequestBody Factura factura){
-        facturaService.delete(factura);
+    private ResponseEntity<List<Detalle>> eliminarDetalle (
+            @RequestBody Detalle detalle){
+        detalleService.delete(detalle);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/buscar/{id}")
-    private ResponseEntity<Optional<Factura>> buscarFactura (
-            @PathVariable ("id") String id){
-        return ResponseEntity.ok(facturaService.findById(id));
+    @GetMapping("/buscar/{numero}")
+    private ResponseEntity<Optional<Detalle>> buscarDetalle (
+            @PathVariable ("numero") String numero){
+        return ResponseEntity.ok(detalleService.findById(numero));
     }
 }

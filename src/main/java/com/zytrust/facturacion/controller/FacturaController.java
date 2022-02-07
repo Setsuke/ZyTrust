@@ -35,7 +35,8 @@ public class FacturaController {
     private FacturaService facturaService;
 
     @PostMapping("/guardar")
-    private ResponseEntity<Factura> guardar (@RequestBody Factura factura){
+    private ResponseEntity<Factura> guardarFactura (
+            @RequestBody Factura factura){
         Factura temp = facturaService.create(factura);
         try{
             return ResponseEntity.created(

@@ -30,44 +30,13 @@ public class Detalle {
 
     @ManyToOne
     @JoinColumn(name="FACT_ID")
-    private Factura factura;
+    private Factura factura;  // Identificador de la factura
 
     @ManyToOne
     @JoinColumn(name="PROD_ID")
-    private Producto producto;
+    private Producto producto;  // Identificador del producto
 
     @Column(name = "DET_CANTIDAD")
-    private Integer cantidad;
+    private Integer cantidad;  // Cantidad del producto
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public Factura getFactura() {
-        return factura;
-    }
-
-    public void setFactura(Factura factura) {
-        this.factura = factura;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
 }

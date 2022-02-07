@@ -31,12 +31,12 @@ public class Producto {
     private String id;  // Identificador del producto
 
     @Column(name = "PROD_NOMBRE")
-    private String nombre;
+    private String nombre;  // Nombre del producto
 
     @Column(name = "PROD_PRECIO")
-    private BigDecimal precio;
+    private BigDecimal precio;  // Precio del producto
 
     @Column(name = "PROD_STOCK")
-    private Integer stock;
+    private Integer stock;  // Cantidad de productos en stock
 
 }

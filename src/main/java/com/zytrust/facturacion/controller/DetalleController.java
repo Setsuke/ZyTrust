@@ -35,11 +35,13 @@ public class DetalleController {
     private DetalleService detalleService;
 
     @PostMapping("/guardar")
-    private ResponseEntity<Detalle> guardar (@RequestBody Detalle detalle){
+    private ResponseEntity<Detalle> guardarDetalle (
+            @RequestBody Detalle detalle){
         Detalle temp = detalleService.create(detalle);
         try{
             return ResponseEntity.created(
-                    new URI("/detalle/guardar"+temp.getNumero())).body(temp);
+                    new URI("/detalle/guardar"+temp.getNumero()))
+                    .body(temp);
         } catch (URISyntaxException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

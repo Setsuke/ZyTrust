@@ -30,24 +30,24 @@ public class Cliente {
     private String id;  // Identificador del cliente
 
     @Column(name = "CLI_NOMBRES")
-    private String nombres;
+    private String nombres;  // Nombres del cliente
 
     @Column(name = "CLI_APELLIDOS")
-    private String apellidos;
+    private String apellidos;  // Apellidos del cliente
 
     @Column(name = "CLI_DNI")
-    private String dni;
+    private String dni;  // DNI del cliente
 
     @Column(name = "CLI_TELEFONO")
-    private String telefono;
+    private String telefono;  // Telefono del cliente
 
     @Column(name = "CLI_RUC")
-    private String ruc;
+    private String ruc;  // RUC del cliente
 
     @Column(name = "CLI_RAZON_SOCIAL")
-    private String razonSocial;
+    private String razonSocial;  // Razon social del cliente
 
     @Column(name = "CLI_DIRECCION")
-    private String direccion;
+    private String direccion;  // Direccion del cliente
 
 }

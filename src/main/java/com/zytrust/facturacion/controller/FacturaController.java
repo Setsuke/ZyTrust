@@ -51,13 +51,6 @@ public class FacturaController {
         return ResponseEntity.ok(facturaService.getAllFacturas());
     }
 
-    @DeleteMapping("/eliminar")
-    private ResponseEntity<List<Factura>> eliminarFactura (
-            @RequestBody Factura factura){
-        facturaService.delete(factura);
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping("/buscar/{id}")
     private ResponseEntity<Optional<Factura>> buscarFactura (
             @PathVariable ("id") String id){

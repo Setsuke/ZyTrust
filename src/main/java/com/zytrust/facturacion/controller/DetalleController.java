@@ -22,6 +22,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+
+import com.zytrust.facturacion.service.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +36,13 @@ public class DetalleController {
     @Autowired
     private DetalleService detalleService;
 
+    private FacturaService facturaService;
+
     @PostMapping("/guardar")
     private ResponseEntity<Detalle> guardarDetalle (
             @RequestBody Detalle detalle){
         Detalle temp = detalleService.create(detalle);
+
         try{
             return ResponseEntity.created(
                     new URI("/detalle/guardar"+temp.getNumero()))

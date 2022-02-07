@@ -21,6 +21,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import lombok.Data;
+import lombok.Value;
 
 @Data
 @Entity
@@ -36,7 +37,7 @@ public class Factura {
     private Cliente Cliente;    // Identificador del cliente
 
     @Column(name = "FACT_ESTADO")
-    private String estado;  // Estado de la factura
+    private String estado = "ingresado";  // Estado de la factura
 
     @Column(name = "FACT_FECHA_EMISION")
     private LocalDate fechaEmision;  // Fecha de emision de la factura
@@ -51,12 +52,13 @@ public class Factura {
     private String tipoPago;  // Tipo de pago de la factura
 
     @Column(name = "FACT_SUBTOTAL", precision = 7,scale = 2,nullable = false)
-    private BigDecimal subtotal;  // Subtotal de la factura
+    private BigDecimal subtotal= BigDecimal.valueOf(0);  // Subtotal de la
+    // factura
 
     @Column(name = "FACT_IMPUESTO", precision = 7,scale = 2,nullable = false)
-    private BigDecimal impuesto;  // Impuesto de la factura
+    private BigDecimal impuesto= BigDecimal.valueOf(0);  // Impuesto de la factura
 
     @Column(name = "FACT_TOTAL", precision = 7,scale = 2,nullable = false)
-    private BigDecimal total;  // Total de la factura
+    private BigDecimal total = BigDecimal.valueOf(0);  // Total de la factura
 
 }

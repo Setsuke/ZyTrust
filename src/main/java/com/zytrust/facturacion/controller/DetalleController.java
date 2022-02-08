@@ -38,33 +38,33 @@ public class DetalleController {
 
     private FacturaService facturaService;
 
-    @PostMapping("/guardar")
+    @PostMapping("/detalle")
     private ResponseEntity<Detalle> guardarDetalle (
             @RequestBody Detalle detalle){
         Detalle temp = detalleService.create(detalle);
 
         try{
             return ResponseEntity.created(
-                    new URI("/detalle/guardar"+temp.getNumero()))
+                    new URI("/detalle"+temp.getNumero()))
                     .body(temp);
         } catch (URISyntaxException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/detalles")
     private ResponseEntity<List<Detalle>> listarDetalles (){
         return ResponseEntity.ok(detalleService.getAllDetalles());
     }
 
-    @DeleteMapping("/eliminar")
+    @DeleteMapping("/detalle")
     private ResponseEntity<List<Detalle>> eliminarDetalle (
             @RequestBody Detalle detalle){
         detalleService.delete(detalle);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/buscar/{numero}")
+    @GetMapping("/detalle/{numero}")
     private ResponseEntity<Optional<Detalle>> buscarDetalle (
             @PathVariable ("numero") String numero){
         return ResponseEntity.ok(detalleService.findById(numero));

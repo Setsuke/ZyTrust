@@ -30,18 +30,22 @@ public class DetalleService {
     private DetalleRepository detalleRepository;
 
     public Detalle create (Detalle detalle){
-        return detalleRepository.save(detalle);  // Crear Detalle
+        /**Crear Detalle*/
+        return detalleRepository.save(detalle);
     }
 
     public List<Detalle> getAllDetalles(){
-        return detalleRepository.findAll();  // Obtener todos los detalles
+        /**Obtener todos los detalles*/
+        return detalleRepository.findAll();
     }
 
     public void delete (Detalle detalle){
-        detalleRepository.delete(detalle);  // eliminar detalle
+        /**eliminar detalle*/
+        detalleRepository.delete(detalle);
     }
 
     public Optional<Detalle> findById (String id){
-        return detalleRepository.findById(id);  // Obtener detalle por ID
+        /**Obtener detalle por ID*/
+        return detalleRepository.findById(id);
     }
 }

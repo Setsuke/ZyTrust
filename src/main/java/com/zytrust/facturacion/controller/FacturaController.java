@@ -34,24 +34,24 @@ public class FacturaController {
     @Autowired
     private FacturaService facturaService;
 
-    @PostMapping("/guardar")
+    @PostMapping("/factura")
     private ResponseEntity<Factura> guardarFactura (
             @RequestBody Factura factura){
         Factura temp = facturaService.create(factura);
         try{
             return ResponseEntity.created(
-                    new URI("/factura/guardar"+temp.getId())).body(temp);
+                    new URI("/factura"+temp.getId())).body(temp);
         } catch (URISyntaxException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/facturas")
     private ResponseEntity<List<Factura>> listarFacturas (){
         return ResponseEntity.ok(facturaService.getAllFacturas());
     }
 
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/factura/{id}")
     private ResponseEntity<Optional<Factura>> buscarFactura (
             @PathVariable ("id") String id){
         return ResponseEntity.ok(facturaService.findById(id));

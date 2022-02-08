@@ -16,7 +16,12 @@ package com.zytrust.facturacion.model;
  * @version 1.00, 04/02/2022
  */
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.math.BigDecimal;
 import lombok.Data;
 
@@ -28,15 +33,19 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PROD_ID")
-    private String id;  // Identificador del producto
+    /**Identificador del producto*/
+    private String id;
 
     @Column(name = "PROD_NOMBRE")
-    private String nombre;  // Nombre del producto
+    /**Nombre del producto*/
+    private String nombre;
 
     @Column(name = "PROD_PRECIO")
-    private BigDecimal precio;  // Precio del producto
+    /**Precio del producto*/
+    private BigDecimal precio;
 
     @Column(name = "PROD_STOCK")
-    private Integer stock;  // Cantidad de productos en stock
+    /**Cantidad de productos en stock*/
+    private Integer stock;
 
 }

@@ -16,7 +16,12 @@ package com.zytrust.facturacion.model;
  * @version 1.00, 04/02/2022
  */
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import lombok.Data;
 
 @Data
@@ -27,27 +32,35 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CLI_ID")
-    private String id;  // Identificador del cliente
+    /**Identificador del cliente*/
+    private String id;
 
     @Column(name = "CLI_NOMBRES")
-    private String nombres;  // Nombres del cliente
+    /**Nombres del cliente*/
+    private String nombres;
 
     @Column(name = "CLI_APELLIDOS")
-    private String apellidos;  // Apellidos del cliente
+    /**Apellidos del cliente*/
+    private String apellidos;
 
     @Column(name = "CLI_DNI")
-    private String dni;  // DNI del cliente
+    /**DNI del cliente*/
+    private String dni;
 
     @Column(name = "CLI_TELEFONO")
-    private String telefono;  // Telefono del cliente
+    /**Telefono del cliente*/
+    private String telefono;
 
     @Column(name = "CLI_RUC")
-    private String ruc;  // RUC del cliente
+    /**RUC del cliente*/
+    private String ruc;
 
     @Column(name = "CLI_RAZON_SOCIAL")
-    private String razonSocial;  // Razon social del cliente
+    /**Razon social del cliente*/
+    private String razonSocial;
 
     @Column(name = "CLI_DIRECCION")
-    private String direccion;  // Direccion del cliente
+    /**Direccion del cliente*/
+    private String direccion;
 
 }

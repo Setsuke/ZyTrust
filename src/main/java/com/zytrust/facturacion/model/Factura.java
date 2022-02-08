@@ -16,12 +16,11 @@ package com.zytrust.facturacion.model;
  * @version 1.00, 04/02/2022
  */
 
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.Value;
 
 @Data
 @Entity
@@ -30,35 +29,46 @@ public class Factura {
 
     @Id
     @Column(name = "FACT_ID")
-    private String id;  // Identificador de la factura
+    /**Identificador de la factura*/
+    private String id;
 
     @ManyToOne
     @JoinColumn(name="CLI_ID")
-    private Cliente Cliente;    // Identificador del cliente
+    @JsonIgnoreProperties({"nombres","apellidos","dni","telefono","ruc",
+            "razonSocial","direccion"})
+    /**Identificador del cliente*/
+    private Cliente cliente;
 
     @Column(name = "FACT_ESTADO")
-    private String estado = "ingresado";  // Estado de la factura
+    /**Estado de la factura*/
+    private String estado = "ingresado";
 
     @Column(name = "FACT_FECHA_EMISION")
-    private LocalDate fechaEmision;  // Fecha de emision de la factura
+    /**Fecha de emision de la factura*/
+    private LocalDate fechaEmision = LocalDate.now();
 
     @Column(name = "FACT_FECHA_VENCIMIENTO")
-    private LocalDate fechaVencimiento;  // Fecha de vencimiento de la factura
+    /**Fecha de vencimiento de la factura*/
+    private LocalDate fechaVencimiento;
 
     @Column(name = "FACT_FECHA_PAGO")
-    private LocalDate fechaPago;  // Fecha de pago de la factura
+    /**Fecha de pago de la factura*/
+    private LocalDate fechaPago;
 
     @Column(name = "FACT_TIPO_PAGO")
-    private String tipoPago;  // Tipo de pago de la factura
+    /**Tipo de pago de la factura*/
+    private String tipoPago;
 
     @Column(name = "FACT_SUBTOTAL", precision = 7,scale = 2,nullable = false)
-    private BigDecimal subtotal= BigDecimal.valueOf(0);  // Subtotal de la
-    // factura
+    /**Subtotal de la factura*/
+    private BigDecimal subtotal= BigDecimal.valueOf(0);
 
     @Column(name = "FACT_IMPUESTO", precision = 7,scale = 2,nullable = false)
-    private BigDecimal impuesto= BigDecimal.valueOf(0);  // Impuesto de la factura
+    /**Impuesto de la factura*/
+    private BigDecimal impuesto= BigDecimal.valueOf(0);
 
     @Column(name = "FACT_TOTAL", precision = 7,scale = 2,nullable = false)
-    private BigDecimal total = BigDecimal.valueOf(0);  // Total de la factura
+    /**Total de la factura*/
+    private BigDecimal total = BigDecimal.valueOf(0);
 
 }

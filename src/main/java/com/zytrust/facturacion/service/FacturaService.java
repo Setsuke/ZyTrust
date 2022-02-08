@@ -30,14 +30,17 @@ public class FacturaService {
     private FacturaRepository facturaRepository;
 
     public Factura create (Factura factura){
-        return facturaRepository.save(factura);  // Crear Factura
+        /**Crear Factura*/
+        return facturaRepository.save(factura);
     }
 
     public List<Factura> getAllFacturas(){
-        return facturaRepository.findAll();  // Obtener todas las facturas
+        /**Obtener todas las facturas*/
+        return facturaRepository.findAll();
     }
 
     public Optional<Factura> findById (String id){
-        return facturaRepository.findById(id);  // Obtener factura por ID
+        /**Obtener factura por ID*/
+        return facturaRepository.findById(id);
     }
 }

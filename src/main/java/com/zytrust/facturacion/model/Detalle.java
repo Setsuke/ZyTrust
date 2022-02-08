@@ -17,6 +17,9 @@ package com.zytrust.facturacion.model;
  */
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
@@ -26,17 +29,25 @@ public class Detalle {
 
     @Id
     @Column(name = "DET_ID")
-    private String numero;  // Identificador del detalle
+    /**Identificador del detalle*/
+    private String numero;
 
     @ManyToOne
     @JoinColumn(name="FACT_ID")
-    private Factura factura;  // Identificador de la factura
+    @JsonIgnoreProperties({"cliente","estado","fechaEmision",
+            "fechaVencimiento","fechaPago","tipoPago","subtotal","impuesto",
+            "total"})
+    /**Identificador de la factura*/
+    private Factura factura;
 
     @ManyToOne
     @JoinColumn(name="PROD_ID")
-    private Producto producto;  // Identificador del producto
+    @JsonIgnoreProperties({"nombre","precio","stock"})
+    /**Identificador del producto*/
+    private Producto producto;
 
     @Column(name = "DET_CANTIDAD")
-    private Integer cantidad;  // Cantidad del producto
+    /**Cantidad del producto*/
+    private Integer cantidad;
 
 }

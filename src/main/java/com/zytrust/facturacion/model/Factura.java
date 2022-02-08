@@ -16,15 +16,20 @@ package com.zytrust.facturacion.model;
  * @version 1.00, 04/02/2022
  */
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
 @Entity
-@Table (name = "FAC_Facturas")
+@Table(name = "FAC_Facturas")
 public class Factura {
 
     @Id

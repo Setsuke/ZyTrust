@@ -1,6 +1,6 @@
 package com.zytrust.facturacion.service;
 /*
- * @(#)FacturaService.java
+ * @(#)ProductoService.java
  *
  * Copyright 2019 ZyTrust SA, Todos los derechos reservados.
  * ZT PROPRIETARIO/CONFIDENTIALIDAD. Su uso está sujeto a los
@@ -9,42 +9,42 @@ package com.zytrust.facturacion.service;
  * expresa de ZyTrust SA.
  */
 /**
- * Esta clase representa a un FacturaService y debe ser usada para almacenar
+ * Esta clase representa a un ProductoService y debe ser usada para almacenar
  * datos e intercambiarlos con otros objetos.
  *
  * @author Sergio Alva
  * @version 1.00, 04/02/2022
  */
 
-import com.zytrust.facturacion.model.Factura;
-import com.zytrust.facturacion.repository.FacturaRepository;
+import com.zytrust.facturacion.model.Producto;
+import com.zytrust.facturacion.repository.ProductoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FacturaService {
+public class ProductoService {
 
     @Autowired
-    private FacturaRepository facturaRepository;
+    private ProductoRepository productoRepository;
 
-    public Factura create (Factura factura){
+    public Producto create (Producto producto){
         /**Crear Factura*/
-        return facturaRepository.save(factura);
+        return productoRepository.save(producto);
     }
 
-    public List<Factura> getAllFacturas(){
+    public List<Producto> getAllProductos(){
         /**Obtener todas las facturas*/
-        return facturaRepository.findAll();
+        return productoRepository.findAll();
     }
 
-    public Factura findById (String id){
+    public Producto findById (String id){
         /**Obtener factura por ID*/
-        return facturaRepository.findById(id).get();
+        return productoRepository.findById(id).get();
     }
 
-    public void update (Factura factura){
+    public void update (Producto producto){
         /**Crear Factura*/
-        facturaRepository.save(factura);
+        productoRepository.save(producto);
     }
 }

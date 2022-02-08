@@ -21,14 +21,13 @@ import com.zytrust.facturacion.service.FacturaService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/factura")
+@RequestMapping("/facturacion")
 public class FacturaController {
 
     @Autowired
@@ -51,9 +50,4 @@ public class FacturaController {
         return ResponseEntity.ok(facturaService.getAllFacturas());
     }
 
-    @GetMapping("/factura/{id}")
-    private ResponseEntity<Optional<Factura>> buscarFactura (
-            @PathVariable ("id") String id){
-        return ResponseEntity.ok(facturaService.findById(id));
-    }
 }

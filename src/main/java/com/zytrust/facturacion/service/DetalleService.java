@@ -48,4 +48,8 @@ public class DetalleService {
         /**Obtener detalle por ID*/
         return detalleRepository.findById(id);
     }
+    public void update (Detalle detalle){
+        /**Crear Detalle*/
+        detalleRepository.save(detalle);
+    }
 }

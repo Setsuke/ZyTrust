@@ -29,22 +29,22 @@ public class ProductoService {
     private ProductoRepository productoRepository;
 
     public Producto create (Producto producto){
-        /**Crear Factura*/
+        /**Crear Producto*/
         return productoRepository.save(producto);
     }
 
     public List<Producto> getAllProductos(){
-        /**Obtener todas las facturas*/
+        /**Obtener todas las productos*/
         return productoRepository.findAll();
     }
 
     public Producto findById (String id){
-        /**Obtener factura por ID*/
+        /**Obtener producto por ID*/
         return productoRepository.findById(id).get();
     }
 
     public void update (Producto producto){
-        /**Crear Factura*/
+        /**Crear producto*/
         productoRepository.save(producto);
     }
 }

@@ -34,7 +34,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/facturacion")
+@RequestMapping("/api")
 public class DetalleController {
 
     @Autowired
@@ -46,18 +46,14 @@ public class DetalleController {
     @Autowired
     private ProductoService productoService;
 
-    @Autowired
-    private DetalleRepository detalleRepository;
-
-    @Autowired
-    private DetalleRepository facturaRepository;
-
     @PostMapping("/detalle")
-    private ResponseEntity<Detalle> Detalle (
+    private ResponseEntity<Detalle> guardaDetalle (
             @RequestBody Detalle detalle){
+
         Factura factura =facturaService.findById(detalle.getFactura().getId());
-        Producto producto =
-                productoService.findById(detalle.getProducto().getId());
+        Producto producto = productoService.findById(detalle.getProducto()
+                .getId());
+
         BigDecimal subtotalAnterior;
         BigDecimal impuestoAnterior;
         BigDecimal totalAnterior;
@@ -74,6 +70,7 @@ public class DetalleController {
 
         BigDecimal precioProducto = producto.getPrecio();
         BigDecimal cantidadProducto= detalle.getCantidad();
+
         totalDetalle = precioProducto.multiply(cantidadProducto);
         impuestoDetalle= precioProducto.multiply(BigDecimal.valueOf(0.18))
                 .multiply(cantidadProducto);
@@ -102,19 +99,19 @@ public class DetalleController {
     }
 
     @GetMapping("/detalles")
-    private ResponseEntity<List<Detalle>> listarDetalles (){
+    private ResponseEntity<List<Detalle>> listaDetalles (){
         return ResponseEntity.ok(detalleService.getAllDetalles());
     }
 
     @DeleteMapping("/detalle")
-    private ResponseEntity<List<Detalle>> eliminarDetalle (
+    private ResponseEntity<List<Detalle>> eliminaDetalle (
             @RequestBody Detalle detalle){
         detalleService.delete(detalle);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/detalle/{numero}")
-    private ResponseEntity<Optional<Detalle>> buscarDetalle (
+    private ResponseEntity<Optional<Detalle>> buscaDetalle (
             @PathVariable ("numero") String numero){
         return ResponseEntity.ok(detalleService.findById(numero));
     }

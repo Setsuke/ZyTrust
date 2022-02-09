@@ -16,15 +16,21 @@ package com.zytrust.facturacion.controller;
  * @version 1.00, 04/02/2022
  */
 
+import com.zytrust.facturacion.model.Cliente;
 import com.zytrust.facturacion.model.Factura;
+import com.zytrust.facturacion.response.FacturaResponse;
+import com.zytrust.facturacion.service.ClienteService;
 import com.zytrust.facturacion.service.FacturaService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/facturacion")
@@ -32,9 +38,13 @@ public class FacturaController {
 
     @Autowired
     private FacturaService facturaService;
+    @Autowired
+    private ClienteService clienteService;
+
+
 
     @PostMapping("/factura")
-    private ResponseEntity<Factura> guardarFactura (
+    private ResponseEntity<Factura> guardaFactura (
             @RequestBody Factura factura){
         Factura temp = facturaService.create(factura);
         try{
@@ -44,9 +54,30 @@ public class FacturaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+/*
+    @PostMapping("/facturaa")
+    private FacturaResponse guardaFacturaa (
+            @RequestBody FacturaResponse factura){
+
+        String idCliente= factura.getClienteId();
+        System.out.println("ENTRA AQUI");
+        System.out.println(idCliente);
+
+        Factura temp = new Factura();
+        Cliente cliente = clienteService.findById(idCliente);
+
+        temp.setCliente();
+        //facturaService.update(temp);
+
+
+        //Factura temp = facturaService.create(factura);
+            return new FacturaResponse();
+
+    }
+    */
 
     @GetMapping("/facturas")
-    private ResponseEntity<List<Factura>> listarFacturas (){
+    private ResponseEntity<List<Factura>> listaFacturas (){
         return ResponseEntity.ok(facturaService.getAllFacturas());
     }
 

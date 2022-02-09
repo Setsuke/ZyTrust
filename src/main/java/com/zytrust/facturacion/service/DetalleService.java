@@ -49,7 +49,7 @@ public class DetalleService {
         return detalleRepository.findById(id);
     }
     public void update (Detalle detalle){
-        /**Crear Detalle*/
+        /**Actualizar Detalle*/
         detalleRepository.save(detalle);
     }
 }

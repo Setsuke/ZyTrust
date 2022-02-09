@@ -44,7 +44,7 @@ public class FacturaService {
     }
 
     public void update (Factura factura){
-        /**Crear Factura*/
+        /**Actualizar Factura*/
         facturaRepository.save(factura);
     }
 }

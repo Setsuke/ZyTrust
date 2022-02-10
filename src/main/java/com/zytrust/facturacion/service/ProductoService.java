@@ -16,7 +16,6 @@ package com.zytrust.facturacion.service;
  * @version 1.00, 04/02/2022
  */
 
-import com.zytrust.facturacion.model.Factura;
 import com.zytrust.facturacion.model.Producto;
 import com.zytrust.facturacion.repository.ProductoRepository;
 import java.util.List;

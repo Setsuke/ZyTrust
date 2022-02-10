@@ -16,12 +16,10 @@ package com.zytrust.facturacion.service;
  * @version 1.00, 04/02/2022
  */
 
-import com.zytrust.facturacion.model.Detalle;
 import com.zytrust.facturacion.model.Factura;
 import com.zytrust.facturacion.repository.FacturaRepository;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

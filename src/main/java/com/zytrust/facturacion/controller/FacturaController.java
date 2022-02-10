@@ -26,6 +26,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import org.apache.coyote.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +41,13 @@ public class FacturaController {
     @Autowired
     private FacturaService facturaService;
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(FacturaController.class);
+
     @PostMapping("/factura")
     private ResponseEntity<Factura> guardaFactura (
             @RequestBody Factura factura){
+        logger.info("Creando la factura con los datos {}",factura.toString());
         Factura temp = facturaService.create(factura);
         try{
             return ResponseEntity.created(

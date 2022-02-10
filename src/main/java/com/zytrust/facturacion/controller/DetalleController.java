@@ -28,6 +28,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,9 +43,13 @@ public class DetalleController {
     @Autowired
     private DetalleService detalleService;
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(FacturaController.class);
+
     @PostMapping("/detalle")
     private ResponseEntity<Detalle> guardaDetalle (
             @RequestBody Detalle detalle){
+        logger.info("Creando el detalle con los datos {}",detalle.toString());
         Detalle temp = detalleService.create(detalle);
         try{
             return ResponseEntity.created(

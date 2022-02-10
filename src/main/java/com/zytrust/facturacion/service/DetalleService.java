@@ -16,6 +16,7 @@ package com.zytrust.facturacion.service;
  * @version 1.00, 04/02/2022
  */
 
+import com.zytrust.facturacion.controller.FacturaController;
 import com.zytrust.facturacion.exception.CodigoError;
 import com.zytrust.facturacion.exception.ZyTrustException;
 import com.zytrust.facturacion.model.Detalle;
@@ -25,10 +26,10 @@ import com.zytrust.facturacion.repository.DetalleRepository;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class DetalleService {
@@ -42,12 +43,17 @@ public class DetalleService {
     @Autowired
     private ProductoService productoService;
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(FacturaController.class);
+
     public Detalle create (Detalle detalle){
         /**Crear Detalle y Agregar Monto a la factura */
 
         Optional<Factura> opFactura =
                 facturaService.getById(detalle.getFactura().getId());
         if (opFactura.isEmpty()){
+            logger.info("No se encontro la factura con codigo {}",
+                    detalle.getFactura().getId());
             throw new ZyTrustException(CodigoError.FACTURA_NO_EXISTE);
         }
         Factura factura = facturaService.findById(detalle.getFactura().getId());
@@ -55,6 +61,8 @@ public class DetalleService {
         Optional<Producto> opProducto =
                 productoService.getById(detalle.getProducto().getId());
         if (opProducto.isEmpty()){
+            logger.info("No se encontro el producto con codigo {}",
+                    detalle.getProducto().getId());
             throw new ZyTrustException(CodigoError.PRODUCTO_NO_EXISTE);
         }
         Producto producto = productoService.findById(detalle.getProducto()
@@ -94,6 +102,7 @@ public class DetalleService {
 
         facturaService.update(factura);
 
+        logger.debug("Actualizando datos de factura {}",factura);
         return detalleRepository.save(detalle);
     }
 

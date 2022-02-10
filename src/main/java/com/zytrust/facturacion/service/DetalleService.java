@@ -16,6 +16,8 @@ package com.zytrust.facturacion.service;
  * @version 1.00, 04/02/2022
  */
 
+import com.zytrust.facturacion.exception.CodigoError;
+import com.zytrust.facturacion.exception.ZyTrustException;
 import com.zytrust.facturacion.model.Detalle;
 import com.zytrust.facturacion.model.Factura;
 import com.zytrust.facturacion.model.Producto;
@@ -24,7 +26,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class DetalleService {
@@ -40,7 +44,19 @@ public class DetalleService {
 
     public Detalle create (Detalle detalle){
         /**Crear Detalle y Agregar Monto a la factura */
-        Factura factura =facturaService.findById(detalle.getFactura().getId());
+
+        Optional<Factura> opFactura =
+                facturaService.getById(detalle.getFactura().getId());
+        if (opFactura.isEmpty()){
+            throw new ZyTrustException(CodigoError.FACTURA_NO_EXISTE);
+        }
+        Factura factura = facturaService.findById(detalle.getFactura().getId());
+
+        Optional<Producto> opProducto =
+                productoService.getById(detalle.getProducto().getId());
+        if (opProducto.isEmpty()){
+            throw new ZyTrustException(CodigoError.PRODUCTO_NO_EXISTE);
+        }
         Producto producto = productoService.findById(detalle.getProducto()
                 .getId());
 

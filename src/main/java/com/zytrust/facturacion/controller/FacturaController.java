@@ -38,10 +38,6 @@ public class FacturaController {
 
     @Autowired
     private FacturaService facturaService;
-    @Autowired
-    private ClienteService clienteService;
-
-
 
     @PostMapping("/factura")
     private ResponseEntity<Factura> guardaFactura (
@@ -54,27 +50,6 @@ public class FacturaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-/*
-    @PostMapping("/facturaa")
-    private FacturaResponse guardaFacturaa (
-            @RequestBody FacturaResponse factura){
-
-        String idCliente= factura.getClienteId();
-        System.out.println("ENTRA AQUI");
-        System.out.println(idCliente);
-
-        Factura temp = new Factura();
-        Cliente cliente = clienteService.findById(idCliente);
-
-        temp.setCliente();
-        //facturaService.update(temp);
-
-
-        //Factura temp = facturaService.create(factura);
-            return new FacturaResponse();
-
-    }
-    */
 
     @GetMapping("/facturas")
     private ResponseEntity<List<Factura>> listaFacturas (){

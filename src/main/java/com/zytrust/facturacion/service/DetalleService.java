@@ -20,12 +20,9 @@ import com.zytrust.facturacion.model.Detalle;
 import com.zytrust.facturacion.model.Factura;
 import com.zytrust.facturacion.model.Producto;
 import com.zytrust.facturacion.repository.DetalleRepository;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-
-import com.zytrust.facturacion.repository.FacturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +39,7 @@ public class DetalleService {
     private ProductoService productoService;
 
     public Detalle create (Detalle detalle){
-
+        /**Crear Detalle y Agregar Monto a la factura */
         Factura factura =facturaService.findById(detalle.getFactura().getId());
         Producto producto = productoService.findById(detalle.getProducto()
                 .getId());

@@ -15,6 +15,7 @@ package com.zytrust.facturacion.repository;
  * @author Sergio Alva
  * @version 1.00, 04/02/2022
  */
+
 import com.zytrust.facturacion.model.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 

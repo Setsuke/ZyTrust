@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/facturacion")
+@RequestMapping("/api")
 public class FacturaController {
 
     @Autowired

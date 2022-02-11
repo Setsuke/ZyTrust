@@ -16,22 +16,18 @@ package com.zytrust.facturacion.controller;
  * @version 1.00, 04/02/2022
  */
 
-import com.zytrust.facturacion.model.Cliente;
 import com.zytrust.facturacion.model.Factura;
-import com.zytrust.facturacion.response.FacturaResponse;
-import com.zytrust.facturacion.service.ClienteService;
 import com.zytrust.facturacion.service.FacturaService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-
-import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
@@ -62,4 +58,12 @@ public class FacturaController {
         return ResponseEntity.ok(facturaService.getAllFacturas());
     }
 
+    @GetMapping("/facturasid")
+    private ResponseEntity<?> listaFacturasId (@RequestParam String id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(facturaService.findAllFacturasByClienteId(id));
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

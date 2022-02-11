@@ -17,24 +17,18 @@ package com.zytrust.facturacion.controller;
  */
 
 import com.zytrust.facturacion.model.Detalle;
-import com.zytrust.facturacion.model.Factura;
-import com.zytrust.facturacion.model.Producto;
-import com.zytrust.facturacion.repository.DetalleRepository;
 import com.zytrust.facturacion.service.DetalleService;
-import com.zytrust.facturacion.service.FacturaService;
-import com.zytrust.facturacion.service.ProductoService;
-import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api")
@@ -76,5 +70,14 @@ public class DetalleController {
     private ResponseEntity<Optional<Detalle>> buscaDetalle (
             @PathVariable ("numero") String numero){
         return ResponseEntity.ok(detalleService.findById(numero));
+    }
+
+    @GetMapping("/detallesid")
+    private ResponseEntity<?> listaDetallesId (@RequestParam String id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(detalleService.findAllDetallesByFacturaId(id));
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }

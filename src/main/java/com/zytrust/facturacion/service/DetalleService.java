@@ -17,6 +17,8 @@ package com.zytrust.facturacion.service;
  */
 
 import com.zytrust.facturacion.controller.FacturaController;
+import com.zytrust.facturacion.dto.DetalleDTO;
+import com.zytrust.facturacion.dto.FacturaDTO;
 import com.zytrust.facturacion.exception.CodigoError;
 import com.zytrust.facturacion.exception.ZyTrustException;
 import com.zytrust.facturacion.model.Detalle;
@@ -47,7 +49,8 @@ public class DetalleService {
             LoggerFactory.getLogger(FacturaController.class);
 
     public Detalle create (Detalle detalle){
-        /**Crear Detalle y Agregar Monto a la factura */
+        /**Crear Detalle y Agregar Montos(subtotal, impuesto, total) a la
+         * factura*/
 
         Optional<Factura> opFactura =
                 facturaService.getById(detalle.getFactura().getId());
@@ -123,5 +126,12 @@ public class DetalleService {
     public void update (Detalle detalle){
         /**Actualizar Detalle*/
         detalleRepository.save(detalle);
+    }
+
+    public List<DetalleDTO> findAllDetallesByFacturaId (String facturaId){
+        /**Actualizar Factura*/
+        List<DetalleDTO> detalles =
+                detalleRepository.findAllByFacturaId(facturaId);
+        return detalles;
     }
 }

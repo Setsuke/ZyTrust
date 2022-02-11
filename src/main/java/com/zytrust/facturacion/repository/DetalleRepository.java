@@ -16,8 +16,14 @@ package com.zytrust.facturacion.repository;
  * @version 1.00, 04/02/2022
  */
 
+import com.zytrust.facturacion.dto.DetalleDTO;
+import com.zytrust.facturacion.dto.FacturaDTO;
 import com.zytrust.facturacion.model.Detalle;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface DetalleRepository extends JpaRepository<Detalle,String> {
+
+    List<DetalleDTO> findAllByFacturaId(String id);
 }

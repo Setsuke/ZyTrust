@@ -16,6 +16,7 @@ package com.zytrust.facturacion.controller;
  * @version 1.00, 04/02/2022
  */
 
+import com.zytrust.facturacion.dto.DetalleReq;
 import com.zytrust.facturacion.model.Detalle;
 import com.zytrust.facturacion.service.DetalleService;
 import java.net.URI;
@@ -40,11 +41,12 @@ public class DetalleController {
     private static final Logger logger =
             LoggerFactory.getLogger(FacturaController.class);
 
+
     @PostMapping("/detalle")
     private ResponseEntity<Detalle> guardaDetalle (
-            @RequestBody Detalle detalle){
-        logger.info("Creando el detalle con los datos {}",detalle.toString());
-        Detalle temp = detalleService.create(detalle);
+            @RequestBody DetalleReq detalleReq){
+        logger.info("Creando el detalle con los datos {}",detalleReq.toString());
+        Detalle temp = detalleService.create(detalleReq);
         try{
             return ResponseEntity.created(
                             new URI("/detalle"+temp.getNumero()))

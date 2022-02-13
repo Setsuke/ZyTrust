@@ -18,6 +18,7 @@ package com.zytrust.facturacion.service;
 
 import com.zytrust.facturacion.controller.FacturaController;
 import com.zytrust.facturacion.dto.DetalleDTO;
+import com.zytrust.facturacion.dto.DetalleReq;
 import com.zytrust.facturacion.dto.FacturaDTO;
 import com.zytrust.facturacion.exception.CodigoError;
 import com.zytrust.facturacion.exception.ZyTrustException;
@@ -48,28 +49,36 @@ public class DetalleService {
     private static final Logger logger =
             LoggerFactory.getLogger(FacturaController.class);
 
-    public Detalle create (Detalle detalle){
+    public Detalle create (DetalleReq detalleReq){
         /**Crear Detalle y Agregar Montos(subtotal, impuesto, total) a la
          * factura*/
 
         Optional<Factura> opFactura =
-                facturaService.getById(detalle.getFactura().getId());
+                facturaService.getById(detalleReq.getFacturaId());
         if (opFactura.isEmpty()){
             logger.info("No se encontro la factura con codigo {}",
-                    detalle.getFactura().getId());
+                    detalleReq.getFacturaId());
             throw new ZyTrustException(CodigoError.FACTURA_NO_EXISTE);
         }
-        Factura factura = facturaService.findById(detalle.getFactura().getId());
+        Factura factura = facturaService.findById(detalleReq.getFacturaId());
 
         Optional<Producto> opProducto =
-                productoService.getById(detalle.getProducto().getId());
+                productoService.getById(detalleReq.getProductoId());
         if (opProducto.isEmpty()){
             logger.info("No se encontro el producto con codigo {}",
-                    detalle.getProducto().getId());
+                    detalleReq.getProductoId());
             throw new ZyTrustException(CodigoError.PRODUCTO_NO_EXISTE);
         }
-        Producto producto = productoService.findById(detalle.getProducto()
-                .getId());
+        Producto producto = productoService.findById(detalleReq.getProductoId());
+
+        Detalle detalle = new Detalle();
+
+
+
+        detalle.setFactura(factura);
+        detalle.setCantidad(detalleReq.getCantidad());
+        detalle.setNumero(detalleReq.getNumero());
+        detalle.setProducto(producto);
 
         BigDecimal subtotalAnterior;
         BigDecimal impuestoAnterior;
@@ -86,7 +95,7 @@ public class DetalleService {
         totalAnterior = factura.getTotal();
 
         BigDecimal precioProducto = producto.getPrecio();
-        BigDecimal cantidadProducto= detalle.getCantidad();
+        BigDecimal cantidadProducto= detalleReq.getCantidad();
 
         totalDetalle = precioProducto.multiply(cantidadProducto);
         impuestoDetalle= precioProducto.multiply(BigDecimal.valueOf(0.18))

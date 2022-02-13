@@ -43,26 +43,13 @@ public class FacturaController {
             LoggerFactory.getLogger(FacturaController.class);
 
     @PostMapping("/factura")
-    private ResponseEntity<Factura> guardaFactura (
-            @RequestBody Factura factura){
-        logger.info("Creando la factura con los datos {}",factura.toString());
-        Factura temp = facturaService.create(factura);
-        try{
-            return ResponseEntity.created(
-                    new URI("/factura"+temp.getId())).body(temp);
-        } catch (URISyntaxException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-    }
-
-    @PostMapping("/facturaa")
     private ResponseEntity<?> guardaFactura (
             @RequestBody FacturaReq facturaReq){
         logger.info("Creando la factura con los datos {}",facturaReq.toString());
         Factura temp = facturaService.createReq(facturaReq);
         try{
             return ResponseEntity.created(
-                    new URI("/facturaa"+temp.getId())).body(temp);
+                    new URI("/factura"+temp.getId())).body(temp);
         } catch (URISyntaxException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

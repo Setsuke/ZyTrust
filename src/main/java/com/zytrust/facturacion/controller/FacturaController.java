@@ -16,6 +16,8 @@ package com.zytrust.facturacion.controller;
  * @version 1.00, 04/02/2022
  */
 
+import com.zytrust.facturacion.dto.FacturaDTO;
+import com.zytrust.facturacion.dto.FacturaReq;
 import com.zytrust.facturacion.model.Factura;
 import com.zytrust.facturacion.service.FacturaService;
 import java.net.URI;
@@ -48,6 +50,19 @@ public class FacturaController {
         try{
             return ResponseEntity.created(
                     new URI("/factura"+temp.getId())).body(temp);
+        } catch (URISyntaxException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @PostMapping("/facturaa")
+    private ResponseEntity<?> guardaFactura (
+            @RequestBody FacturaReq facturaReq){
+        logger.info("Creando la factura con los datos {}",facturaReq.toString());
+        Factura temp = facturaService.createReq(facturaReq);
+        try{
+            return ResponseEntity.created(
+                    new URI("/facturaa"+temp.getId())).body(temp);
         } catch (URISyntaxException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

@@ -17,8 +17,12 @@ package com.zytrust.facturacion.service;
  */
 
 import com.zytrust.facturacion.dto.FacturaDTO;
+import com.zytrust.facturacion.dto.FacturaReq;
+import com.zytrust.facturacion.model.Cliente;
 import com.zytrust.facturacion.model.Factura;
 import com.zytrust.facturacion.repository.FacturaRepository;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +34,32 @@ public class FacturaService {
     @Autowired
     private FacturaRepository facturaRepository;
 
+    @Autowired
+    private ClienteService clienteService;
+
     public Factura create (Factura factura){
         /**Crear Factura*/
+        return facturaRepository.save(factura);
+    }
+
+    public Factura createReq (FacturaReq facturaReq){
+        /**Crear Factura*/
+
+        String facturaId = facturaReq.getFacturaId();
+        String clienteId = facturaReq.getClienteId();
+        LocalDate fechaVencimiento = facturaReq.getFechaVencimiento();
+        LocalDate fechaPago = facturaReq.getFechaPago();
+        String tipoPago = facturaReq.getTipoPago();
+
+        Cliente cliente = clienteService.findById(clienteId);
+
+        Factura factura = new Factura();
+        factura.setId(facturaId);
+        factura.setCliente(cliente);
+        factura.setFechaVencimiento(fechaVencimiento);
+        factura.setFechaPago(fechaPago);
+        factura.setTipoPago(tipoPago);
+
         return facturaRepository.save(factura);
     }
 

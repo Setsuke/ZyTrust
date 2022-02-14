@@ -17,11 +17,9 @@ package com.zytrust.facturacion.repository;
  */
 
 import com.zytrust.facturacion.dto.DetalleDTO;
-import com.zytrust.facturacion.dto.FacturaDTO;
 import com.zytrust.facturacion.model.Detalle;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DetalleRepository extends JpaRepository<Detalle,String> {
 

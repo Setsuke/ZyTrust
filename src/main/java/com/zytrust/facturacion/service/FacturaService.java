@@ -18,6 +18,7 @@ package com.zytrust.facturacion.service;
 
 import com.zytrust.facturacion.dto.FacturaDTO;
 import com.zytrust.facturacion.dto.FacturaReq;
+import com.zytrust.facturacion.dto.FacturaTotalDTO;
 import com.zytrust.facturacion.model.Cliente;
 import com.zytrust.facturacion.model.Factura;
 import com.zytrust.facturacion.repository.FacturaRepository;
@@ -63,9 +64,9 @@ public class FacturaService {
         return facturaRepository.save(factura);
     }
 
-    public List<Factura> getAllFacturas(){
+    public List<FacturaDTO> getAllFacturas(){
         /**Obtener todas las facturas*/
-        return facturaRepository.findAll();
+        return facturaRepository.findAllfacturasDTO();
     }
 
     public Factura findById (String id){
@@ -88,5 +89,10 @@ public class FacturaService {
         List<FacturaDTO> facturas =
                 facturaRepository.findAllByClienteId(clienteId);
         return facturas;
+    }
+
+    public List<FacturaTotalDTO> facturaDTOTotal(){
+        /**Visualizar las facturas con su cliente y su total*/
+        return facturaRepository.facturaDTOTotal();
     }
 }

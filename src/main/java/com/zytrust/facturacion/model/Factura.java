@@ -39,8 +39,6 @@ public class Factura {
 
     @ManyToOne
     @JoinColumn(name="CLI_ID")
-    @JsonIgnoreProperties({"nombres","apellidos","dni","telefono","ruc",
-            "razonSocial","direccion"})
     /**Identificador del cliente*/
     private Cliente cliente;
 

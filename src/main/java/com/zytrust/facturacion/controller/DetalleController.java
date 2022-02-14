@@ -74,7 +74,7 @@ public class DetalleController {
         return ResponseEntity.ok(detalleService.findById(numero));
     }
 
-    @GetMapping("/detallesid")
+    @GetMapping("/detalles-id")
     private ResponseEntity<?> listaDetallesId (@RequestParam String id){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(detalleService.findAllDetallesByFacturaId(id));

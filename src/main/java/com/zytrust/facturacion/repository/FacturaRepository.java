@@ -17,6 +17,7 @@ package com.zytrust.facturacion.repository;
  */
 
 import com.zytrust.facturacion.dto.FacturaDTO;
+import com.zytrust.facturacion.dto.FacturaTotalDTO;
 import com.zytrust.facturacion.model.Factura;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,4 +27,16 @@ import org.springframework.data.jpa.repository.Query;
 public interface FacturaRepository extends JpaRepository<Factura,String> {
 
     List<FacturaDTO> findAllByClienteId(String clienteId);
+
+    @Query(value = "SELECT f.id as id, f.cliente.nombres as " +
+            "clienteNombres,f.cliente.apellidos as clienteApellidos, f.total " +
+            "as total FROM Factura as f")
+    List<FacturaTotalDTO> facturaDTOTotal();
+
+    @Query(value = "SELECT f.id as id, f.cliente.id as " +
+            "clienteId,f.estado as estado, f.fechaEmision as fechaEmision, f" +
+            ".fechaVencimiento as fechaVencimiento, f.fechaPago as fechaPago," +
+            " f.tipoPago as tipoPago, f.subtotal as subtotal, f.impuesto as " +
+            "impuesto, f.total as total FROM Factura as f")
+    List<FacturaDTO> findAllfacturasDTO();
 }

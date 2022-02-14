@@ -18,6 +18,7 @@ package com.zytrust.facturacion.controller;
 
 import com.zytrust.facturacion.dto.FacturaDTO;
 import com.zytrust.facturacion.dto.FacturaReq;
+import com.zytrust.facturacion.dto.FacturaTotalDTO;
 import com.zytrust.facturacion.model.Factura;
 import com.zytrust.facturacion.service.FacturaService;
 import java.net.URI;
@@ -56,16 +57,22 @@ public class FacturaController {
     }
 
     @GetMapping("/facturas")
-    private ResponseEntity<List<Factura>> listaFacturas (){
+    private ResponseEntity<List<FacturaDTO>> listaFacturas (){
         return ResponseEntity.ok(facturaService.getAllFacturas());
     }
 
-    @GetMapping("/facturasid")
+    @GetMapping("/facturas-id")
     private ResponseEntity<?> listaFacturasId (@RequestParam String id){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(facturaService.findAllFacturasByClienteId(id));
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/facturas-dto")
+    private List<FacturaTotalDTO> listaFacturasDtoTotales (){
+        logger.debug("Obteniendo Facturas Dto");
+        return facturaService.facturaDTOTotal();
     }
 }

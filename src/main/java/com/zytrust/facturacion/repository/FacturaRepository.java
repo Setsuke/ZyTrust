@@ -27,9 +27,10 @@ public interface FacturaRepository extends JpaRepository<Factura,String> {
 
     List<FacturaDTO> findAllByClienteId(String clienteId);
 
-    @Query(value = "SELECT f.id as id, f.cliente.nombres as " +
-            "clienteNombres,f.cliente.apellidos as clienteApellidos, f.total " +
-            "as total, f.fechaEmision as fechaEmision FROM Factura as f")
+    @Query(value = "SELECT f.id as id, CONCAT(f.cliente.nombres,' ',f" +
+            ".cliente.apellidos) as clienteNombre," +
+             "f.total as total, f.fechaEmision as fechaEmision FROM Factura " +
+            "as f")
     List<FacturaTotalDTO> facturaDTOTotal();
 
     @Query(value = "SELECT f.id as id, f.cliente.id as " +

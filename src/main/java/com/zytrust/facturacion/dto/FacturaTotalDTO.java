@@ -23,9 +23,7 @@ public interface FacturaTotalDTO {
 
     String getId();
 
-    String getClienteNombres();
-
-    String getClienteApellidos();
+    String getClienteNombre();
 
     BigDecimal getTotal();
 

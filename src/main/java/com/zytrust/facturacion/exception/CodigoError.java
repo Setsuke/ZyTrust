@@ -21,7 +21,8 @@ public enum CodigoError {
 
     CLIENTE_NO_EXISTE("El cliente con el id indicado no existe"),
     FACTURA_NO_EXISTE("La factura con el id indicado no existe"),
-    PRODUCTO_NO_EXISTE("El producto con el id indicado no existe");
+    PRODUCTO_NO_EXISTE("El producto con el id indicado no existe"),
+    CREACION_FACTURA_FALLO("No se pudo crear la factura con exito");
 
     private final String descripcion;
 

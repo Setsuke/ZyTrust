@@ -17,6 +17,7 @@ package com.zytrust.facturacion.controller;
  */
 
 import com.zytrust.facturacion.dto.DetalleReq;
+import com.zytrust.facturacion.exception.ZyTrustException;
 import com.zytrust.facturacion.model.Detalle;
 import com.zytrust.facturacion.service.DetalleService;
 import java.net.URI;
@@ -78,7 +79,7 @@ public class DetalleController {
     private ResponseEntity<?> listaDetallesId (@RequestParam String id){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(detalleService.findAllDetallesByFacturaId(id));
-        }catch (Exception e){
+        }catch (ZyTrustException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }

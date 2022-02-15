@@ -16,16 +16,23 @@ package com.zytrust.facturacion.service;
  * @version 1.00, 04/02/2022
  */
 
+import com.zytrust.facturacion.controller.FacturaController;
 import com.zytrust.facturacion.dto.FacturaDTO;
 import com.zytrust.facturacion.dto.FacturaReq;
 import com.zytrust.facturacion.dto.FacturaTotalDTO;
+import com.zytrust.facturacion.exception.CodigoError;
+import com.zytrust.facturacion.exception.ZyTrustException;
 import com.zytrust.facturacion.model.Cliente;
 import com.zytrust.facturacion.model.Factura;
+import com.zytrust.facturacion.model.Producto;
 import com.zytrust.facturacion.repository.FacturaRepository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +44,9 @@ public class FacturaService {
 
     @Autowired
     private ClienteService clienteService;
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(FacturaController.class);
 
     public Factura create (Factura factura){
         /**Crear Factura*/
@@ -85,9 +95,18 @@ public class FacturaService {
     }
 
     public List<FacturaDTO> findAllFacturasByClienteId (String clienteId){
-        /**Actualizar Factura*/
+        /**Obtener Facturas por Id del cliente*/
+
+        logger.info("Listando facturas por el cliente de id: {}", clienteId);
+
+        Optional<Cliente> opCliente = clienteService.getById(clienteId);
+        if (opCliente.isEmpty()){
+            throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
+        }
+
         List<FacturaDTO> facturas =
                 facturaRepository.findAllByClienteId(clienteId);
+
         return facturas;
     }
 

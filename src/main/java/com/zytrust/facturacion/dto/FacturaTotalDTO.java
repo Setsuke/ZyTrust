@@ -17,7 +17,7 @@ package com.zytrust.facturacion.dto;
  */
 
 import java.math.BigDecimal;
-
+import java.time.LocalDate;
 
 public interface FacturaTotalDTO {
 
@@ -28,4 +28,6 @@ public interface FacturaTotalDTO {
     String getClienteApellidos();
 
     BigDecimal getTotal();
+
+    LocalDate getFechaEmision();
 }

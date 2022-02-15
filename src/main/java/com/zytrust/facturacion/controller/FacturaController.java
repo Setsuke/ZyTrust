@@ -19,6 +19,8 @@ package com.zytrust.facturacion.controller;
 import com.zytrust.facturacion.dto.FacturaDTO;
 import com.zytrust.facturacion.dto.FacturaReq;
 import com.zytrust.facturacion.dto.FacturaTotalDTO;
+import com.zytrust.facturacion.exception.CodigoError;
+import com.zytrust.facturacion.exception.ZyTrustException;
 import com.zytrust.facturacion.model.Factura;
 import com.zytrust.facturacion.service.FacturaService;
 import java.net.URI;
@@ -51,8 +53,10 @@ public class FacturaController {
         try{
             return ResponseEntity.created(
                     new URI("/factura"+temp.getId())).body(temp);
-        } catch (URISyntaxException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (ZyTrustException | URISyntaxException e) {
+            logger.error("No se ha podido crear la factura con los datos {}",
+                    facturaReq);
+            throw new ZyTrustException(CodigoError.CREACION_FACTURA_FALLO);
         }
     }
 
@@ -63,16 +67,12 @@ public class FacturaController {
 
     @GetMapping("/facturas-id")
     private ResponseEntity<?> listaFacturasId (@RequestParam String id){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(facturaService.findAllFacturasByClienteId(id));
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(facturaService.findAllFacturasByClienteId(id));
     }
 
     @GetMapping("/facturas-dto")
     private List<FacturaTotalDTO> listaFacturasDtoTotales (){
-        logger.debug("Obteniendo Facturas Dto");
+        logger.debug("Obteniendo listado de Facturas");
         return facturaService.facturaDTOTotal();
     }
 }

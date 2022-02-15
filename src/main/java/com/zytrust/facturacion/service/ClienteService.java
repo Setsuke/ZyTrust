@@ -17,11 +17,13 @@ package com.zytrust.facturacion.service;
  */
 
 import com.zytrust.facturacion.model.Cliente;
+import com.zytrust.facturacion.model.Producto;
 import com.zytrust.facturacion.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -47,5 +49,10 @@ public class ClienteService {
     public void update (Cliente cliente){
         /**Actualizar cliente*/
         clienteRepository.save(cliente);
+    }
+
+    public Optional<Cliente> getById (String id){
+        /**Obtener cliente por ID*/
+        return clienteRepository.findById(id);
     }
 }

@@ -29,7 +29,7 @@ public interface FacturaRepository extends JpaRepository<Factura,String> {
 
     @Query(value = "SELECT f.id as id, f.cliente.nombres as " +
             "clienteNombres,f.cliente.apellidos as clienteApellidos, f.total " +
-            "as total FROM Factura as f")
+            "as total, f.fechaEmision as fechaEmision FROM Factura as f")
     List<FacturaTotalDTO> facturaDTOTotal();
 
     @Query(value = "SELECT f.id as id, f.cliente.id as " +
